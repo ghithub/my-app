@@ -1,4 +1,5 @@
-﻿import {Hero} from './hero';
+﻿//This dummy file is no longer needed after in-memory-data.service.ts is created.
+import {Hero} from './hero';
 
 export const HEROES: Hero[] = [
 	{id: 11, name: 'Mr. Nice'},
