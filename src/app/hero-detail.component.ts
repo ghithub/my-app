@@ -7,24 +7,28 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
 @Component({
-   selector: 'hero-detail',
-   templateUrl: './hero-detail.component.html'
+    selector: 'hero-detail',
+    templateUrl: './hero-detail.component.html'
 })
 export class HeroDetailComponent implements OnInit {
 	@Input() hero: Hero;
-	constructor(
-	   private heroService: HeroService,
-	   private route: ActivatedRoute,
-	   private location: Location
-	){}
+    constructor(
+        private heroService: HeroService,
+        private route: ActivatedRoute,
+        private location: Location
+        ) { }
 
-	ngOnInit(): void {
-	   this.route.paramMap
-	   .switchMap((params: ParamMap) => this.heroService.getHero(+params.get('id')))
-	   .subscribe(hero => this.hero = hero);
-	}
+    ngOnInit(): void {
+        this.route.paramMap
+            .switchMap((params: ParamMap) => this.heroService.getHero(+params.get('id')))
+            .subscribe(hero => this.hero = hero);
+    }
 
-	goBack(): void {
-	  this.location.back();
-	}
+    goBack(): void {
+        this.location.back();
+    }
+
+    save(): void {
+        this.heroService.update(this.hero).then(()=> this.goBack());
+    }
 }
